@@ -5,8 +5,10 @@
 class icinga2::install {
 
   package { 'icinga2':
-    ensure   => installed,
+    ensure   => latest,
   }
+
+  Package['icinga2'] ~> Service['puppet']
 
   validate_bool($::icinga2::install_plugins)
   if $::icinga2::install_plugins == true {
